@@ -13,8 +13,11 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">                   
 
     <!-- scan the package and the sub package -->
-    <context:component-scan base-package="com.snow.controller"/>
-    
+    <context:component-scan base-package="com.snow.controller" />
+    <context:component-scan base-package="com.snow.service" />
+    <context:component-scan base-package="com.snow.service.impl" />
+    <context:component-scan base-package="com.snow.dao" />
+    <context:component-scan base-package="com.snow.dao.impl" />
     
     <util:properties id="dbParams" location="classpath:db.properties"></util:properties>
 	<bean id="dbcp" 
