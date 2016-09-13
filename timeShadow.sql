@@ -5,3 +5,5 @@ CREATE TABLE user(
 	upwd varchar(50) NOT NULL,
 	uemail varchar(100) NOT NULL
 );
+/*创建相册表*/
+/*创建照片表*/
