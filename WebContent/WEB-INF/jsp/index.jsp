@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -9,7 +10,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Snow &mdash; 你非常nice啊 </title>
+	<title>${user.username} &mdash; ${user.descriptions}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="这是一个多用户照片分享系统" />
 	<meta name="keywords" content="照片,时光留影,分享,记录" />
@@ -25,7 +26,7 @@
 	<link rel="stylesheet" href="css/salvattore.css">
 	<!--bootstrap-->
 	 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css">
-	<!-- Theme Style -->
+	<!-- Main Style -->
 	<link rel="stylesheet" href="css/style.css">
 	<!-- Modernizr JS(用于检验用户浏览器的html5和css3特性) -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -39,13 +40,13 @@
 		
 	<div id="time-offcanvass">
 		<a href="#" class="time-offcanvass-close js-time-offcanvass-close">Menu <i class="icon-cross"></i> </a>
-		<h1 class="time-logo"><a class="navbar-brand" href="index.html">${username}</a></h1>
+		<h1 class="time-logo"><a class="navbar-brand" href="#">${user.username}</a></h1>
 		<ul>
 			<li class="active"><a href="index.html">主页</a></li>
 			<li><a href="albums.html">相册</a></li>
 			<li><a href="friends.html">好友</a></li>
 			<li><a href="history.html">我的时光海苔</a></li>
-			<li><a href="about.html">关于</a></li>
+			<li><a href="message">信息管理</a></li>
 		</ul>
 		<h3 class="fh5co-lead">Connect with us</h3>
 		<p class="time-social-icons">
@@ -59,7 +60,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<a href="#" class="time-menu-btn js-time-menu-btn">Menu <i class="icon-menu"></i></a>
-					<a class="navbar-brand" href="index.html">${username}</a>		
+					<a class="navbar-brand" href="#">${user.username}</a>		
 				</div>
 			</div>
 		</div>
@@ -174,7 +175,7 @@
 						<a href="#"><i class="icon-dribbble"></i></a>
 						<a href="#"><i class="icon-youtube"></i></a>
 					</p>
-					<p><small>&copy; 时光流影小分队. All Rights Reserved.</p>
+					<p><small>&copy; <a href="about" class="about">时光流影小分队.</a> All Rights Reserved.</p>
 				</div>
 			</div>
 		</div>

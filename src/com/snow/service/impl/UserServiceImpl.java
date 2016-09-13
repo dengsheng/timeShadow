@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.snow.dao.UserDao;
 
-import com.snow.entity.User;
+import com.snow.model.User;
 import com.snow.service.UserService;
 
 

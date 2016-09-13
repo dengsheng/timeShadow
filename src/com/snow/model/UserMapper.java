@@ -1,4 +1,4 @@
-package com.snow.entity;
+package com.snow.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +14,7 @@ public class UserMapper implements RowMapper<User>{
 		user.setUsername(rs.getString("uname"));
 		user.setPassword(rs.getString("upwd"));
 		user.setEmail(rs.getString("uemail"));
+		user.setDescriptions(rs.getString("udescriptions"));
 		return user;
 	}
 

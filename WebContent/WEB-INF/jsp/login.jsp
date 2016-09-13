@@ -31,86 +31,19 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Modernizr JS -->
     <script src="js/modernizr-2.6.2.min.js"></script>
-    
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        body{
-            background: #f5f6f7;
-        }
-        canvas{
-            position:absolute;
-            z-index:-1;
-        }
-
-        /*每日精选*/
-        div.daily-img{
-           position: absolute;
-            top:20%;
-            left:10%;
-            width:500px;
-            height:400px;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            -ms-border-radius: 4px;
-            border-radius:4px;
-            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-            margin:10px 10px 20px 20px;
-            background: #f5f6f7;
-            overflow:hidden;
-            z-index:1;
-
-        }
-        div.daily-img a{
-            display:block;
-            cursor:pointer;
-        }
-        div.daily-img .descriptions{
-            padding:10px;
-            float:left;
-            line-height:24px;
-
-        }
-        div.daily-img .border-image{
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-            overflow: hidden;
-        }
-        div.daily-img img {
-          max-width: 100%;
-          -webkit-transition: 0.2s;
-          -o-transition: 0.2s;
-          transition: 0.2s;
-        }
-        div.daily-img .image-popup:hover img{
-            opacity:.5;
-        }
-
-        /*登录、注册表单*/
-        form{
-            width:350px;
-            height:auto;
-            position:absolute;
-            top:20%;
-            left:50%;
-            margin-top:10px;
-            margin-left:50px;
-        }
-        form.register{
-            display:none;
-        }
-    </style>
 </head>
 <body>
     <!--canvas背景-->
     <canvas id="canvas"></canvas>
 	<!--用户不存在弹框 -->
 	<c:if test="${erroruser}">
+		<div class="alert alert-dismissible alert-danger">
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  <strong>${message}</strong> 
+		</div>
+	</c:if>
+	<!--密码错误-->
+	<c:if test="${errorpwd}">
 		<div class="alert alert-dismissible alert-danger">
 		  <button type="button" class="close" data-dismiss="alert">&times;</button>
 		  <strong>${message}</strong> 
@@ -127,7 +60,7 @@
     </div>
 
     <!--登录模块-->
-    <form class="form-horizontal login" action="login.do">
+    <form class="form-horizontal login" action="index" method="POST">
         <div class="form-group">
             <label for="username" class="col-lg-2 control-label glyphicon glyphicon-user"></label>
             <div class="col-lg-10">
@@ -149,7 +82,7 @@
     </form>
     
     <!--注册模块-->
-    <form class="form-horizontal register" method="GET" action="register.do">
+    <form class="form-horizontal register" method="POST" action="register">
         <div class="form-group">
             <label for="username" class="col-lg-2 control-label icon-user"></label>
             <div class="col-lg-10">
@@ -176,6 +109,8 @@
             </div>
         </div>
     </form>
+    
+  
     
     <!-- jQuery -->
 	<script src="js/jquery.min.js"></script>

@@ -1,6 +1,6 @@
 package com.snow.service;
 
-import com.snow.entity.User;
+import com.snow.model.User;
 
 public interface UserService {
 	public User login(User u);

@@ -1,6 +1,6 @@
 package com.snow.dao;
 
-import com.snow.entity.User;
+import com.snow.model.User;
 
 public interface UserDao {
 	public User login(User u);

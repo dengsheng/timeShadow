@@ -2,13 +2,14 @@ package com.snow.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.snow.entity.User;
 
+import com.snow.model.User;
 import com.snow.service.UserService;
 
 @Controller
@@ -24,8 +25,8 @@ public class mvcController {
     }
     
     /*登录验证*/
-    @RequestMapping("/login.do")
-	public ModelAndView login(HttpServletRequest request){
+    @RequestMapping("/index")
+	public ModelAndView login(HttpSession session,HttpServletRequest request){
 		System.out.println("login.do");
 		ModelAndView modelAndView = new ModelAndView();
 		String username = request.getParameter("username");
@@ -37,7 +38,11 @@ public class mvcController {
 		//判断用户是否存在
 		if (user != null) {
 			if(user.getPassword().equals(" ")== false){
-				modelAndView.addObject("username",username);
+				modelAndView.addObject("user",user);
+				session.setAttribute("username", user.getUsername());
+				session.setAttribute("password", user.getPassword());
+				session.setAttribute("descriptions", user.getDescriptions());
+				session.setAttribute("email",user.getEmail());
 				modelAndView.setViewName("/index");//如果存在并且密码正确的话，返回到index.jsp页面
 				return modelAndView;
 			}else{
@@ -54,10 +59,26 @@ public class mvcController {
 		}	
 	}
     
+    /*个人信息页面*/
+    @RequestMapping("message")
+    public String messgae(HttpSession session){
+    	if(session.getAttribute("username") != null){
+    		return "message";
+    	}else{
+    		return "login";
+    	}
+    	
+    }
+    
+    /*修改个人信息*/
+    @RequestMapping("amessage")
+    public String amessage(String username,String descriptions){
+    	return "message";
+    }
+    
     /*注册用户*/
-    @RequestMapping("register.do")
+    @RequestMapping("register")
     public String register(HttpServletRequest request){
-    	ModelAndView modelAndView = new ModelAndView();
     	String username = request.getParameter("username");
     	String password = request.getParameter("password");
     	String email = request.getParameter("email");
@@ -66,10 +87,17 @@ public class mvcController {
     	newuser.setPassword(password);
     	newuser.setEmail(email);
     	if(userService.register(newuser)){
-    		return "index";
+    		return "login";
     	}else{
     		return "login";
     	}
     }
+    
+    /*关于开发者*/
+    @RequestMapping("about")
+    public String about(){
+    	return "about";
+    }
+    
     
 }

@@ -1,4 +1,4 @@
-package com.snow.entity;
+package com.snow.model;
 
 import java.io.Serializable;
 
@@ -7,6 +7,7 @@ public class User implements Serializable{
 	private String username;
 	private String password;
 	private String email;
+	private String descriptions;
 	public int getId() {
 		return id;
 	}
@@ -31,6 +32,11 @@ public class User implements Serializable{
 	public void setEmail(String email){
 		this.email = email;
 	}
-	
+	public String getDescriptions(){
+		return descriptions;
+	}
+	public void setDescriptions(String descriptions){
+		this.descriptions = descriptions;
+	}
 	
 }

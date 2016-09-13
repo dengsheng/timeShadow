@@ -9,10 +9,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 
-import com.snow.entity.UserMapper;
 
 import com.snow.dao.UserDao;
-import com.snow.entity.User;
+import com.snow.model.User;
+import com.snow.model.UserMapper;
 
 @Repository
 public class UserDaoImpl implements UserDao{
@@ -54,5 +54,12 @@ public class UserDaoImpl implements UserDao{
 		}else{
 			return false;
 		}
+	}
+	
+	/*修改个人信息*/
+	public boolean amessage(String ousername,String username,String descriptions){
+		String sql = "UPDATE USER SET uname=?,udescriptions=? WHERE uname=?";
+		int row = template.update(sql,new Object[]{});
+		return true;
 	}
 }
