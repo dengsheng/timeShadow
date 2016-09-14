@@ -1,14 +1,18 @@
 package com.snow.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import com.snow.model.Album;
 import com.snow.model.User;
 import com.snow.service.UserService;
 
@@ -39,6 +43,7 @@ public class mvcController {
 		if (user != null) {
 			if(user.getPassword().equals(" ")== false){
 				modelAndView.addObject("user",user);
+				session.setAttribute("id", user.getId());
 				session.setAttribute("username", user.getUsername());
 				session.setAttribute("password", user.getPassword());
 				session.setAttribute("descriptions", user.getDescriptions());
@@ -72,8 +77,14 @@ public class mvcController {
     
     /*修改个人信息*/
     @RequestMapping("amessage")
-    public String amessage(String username,String descriptions){
-    	return "message";
+    public String amessage(HttpSession session,String username,String descriptions){
+    	String ousername = (String)session.getAttribute("username");
+    	if(userService.amessage(ousername, username, descriptions)){
+    		return "message";
+    	}else{
+    		return "message";
+    	}
+    	
     }
     
     /*注册用户*/
@@ -91,6 +102,20 @@ public class mvcController {
     	}else{
     		return "login";
     	}
+    }
+    
+    /*相册*/
+    @RequestMapping("albums")
+    public String albums(HttpSession session,Model model){
+    	int uid = 0;
+    	try{
+    		uid = Integer.parseInt(session.getAttribute("id").toString());
+    	}catch(NumberFormatException e){
+    		e.printStackTrace();
+    	}
+		List<Album> albums = userService.getAllProblems(uid);
+    	model.addAttribute("albums", albums);
+    	return "albums";
     }
     
     /*关于开发者*/

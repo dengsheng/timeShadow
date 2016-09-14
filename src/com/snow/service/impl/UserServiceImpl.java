@@ -1,11 +1,14 @@
 package com.snow.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.snow.dao.UserDao;
 
+import com.snow.model.Album;
 import com.snow.model.User;
 import com.snow.service.UserService;
 
@@ -27,6 +30,15 @@ public class UserServiceImpl implements UserService{
 	public boolean register(User u) {
 		// TODO Auto-generated method stub
 		return userDao.register(u);
+	}
+	public boolean amessage(String ousername,String username,String descriptions){
+		return userDao.amessage(ousername, username, descriptions);
+	}
+
+	@Override
+	public List<Album> getAllProblems(int uid) {
+		// TODO Auto-generated method stub
+		return userDao.getAllAlbums(uid);
 	}
 
 }

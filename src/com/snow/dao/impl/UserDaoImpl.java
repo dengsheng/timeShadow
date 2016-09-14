@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 
 import com.snow.dao.UserDao;
+import com.snow.model.Album;
+import com.snow.model.AlbumMapper;
 import com.snow.model.User;
 import com.snow.model.UserMapper;
 
@@ -59,7 +61,21 @@ public class UserDaoImpl implements UserDao{
 	/*修改个人信息*/
 	public boolean amessage(String ousername,String username,String descriptions){
 		String sql = "UPDATE USER SET uname=?,udescriptions=? WHERE uname=?";
-		int row = template.update(sql,new Object[]{});
-		return true;
+		int row = template.update(sql,new Object[]{username,descriptions,ousername});
+		if(row > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	/*获取相册*/
+	@Override
+	public List<Album> getAllAlbums(int uid) {
+		// TODO Auto-generated method stub
+		String sql = "select * from album where uid=?";
+		RowMapper<Album> albumMapper = new AlbumMapper();
+		List<Album> albums = template.query(sql, new Object[]{uid}, albumMapper);
+		return albums;
 	}
 }
