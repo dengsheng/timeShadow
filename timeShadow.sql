@@ -6,4 +6,14 @@ CREATE TABLE user(
 	uemail varchar(100) NOT NULL
 );
 /*创建相册表*/
+CREATE TABLE album(
+	aid INT NOT NULL AUTO_INCREMENT,
+	aname varchar(100) NOT NULL,
+	adescription text ,
+	adate date,
+	apv int,
+	uid int NOT NULL,
+	PRIMARY KEY(aid),
+	FOREIGN KEY(uid) REFERENCES user(uid)
+);
 /*创建照片表*/

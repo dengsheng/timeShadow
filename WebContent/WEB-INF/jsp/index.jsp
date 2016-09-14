@@ -42,13 +42,13 @@
 		<a href="#" class="time-offcanvass-close js-time-offcanvass-close">Menu <i class="icon-cross"></i> </a>
 		<h1 class="time-logo"><a class="navbar-brand" href="#">${user.username}</a></h1>
 		<ul>
-			<li class="active"><a href="index.html">主页</a></li>
-			<li><a href="albums.html">相册</a></li>
-			<li><a href="friends.html">好友</a></li>
-			<li><a href="history.html">我的时光海苔</a></li>
+			<li class="active"><a href="#">主页</a></li>
+			<li><a href="albums">相册</a></li>
+			<li><a href="#">好友</a></li>
+			<li><a href="#">我的时光海苔</a></li>
 			<li><a href="message">信息管理</a></li>
 		</ul>
-		<h3 class="fh5co-lead">Connect with us</h3>
+		<h3 class="time-lead">Connect with us</h3>
 		<p class="time-social-icons">
 			<a href="#"><i class="icon-renren"></i></a>
 			<a href="#"><i class="icon-sina-weibo"></i></a>
@@ -164,7 +164,7 @@
 	</div>
 	<!--main-end-->
 
-	<footer id="fh5co-footer">
+	<footer id="time-footer">
 		<div class="container">
 			<div class="row row-padded">
 				<div class="col-md-12 text-center">
