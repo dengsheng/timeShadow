@@ -17,3 +17,12 @@ CREATE TABLE album(
 	FOREIGN KEY(uid) REFERENCES user(uid)
 );
 /*创建照片表*/
+CREATE TABLE imgs(
+   tid INT NOT NULL AUTO_INCREMENT,
+   tname varchar(255) NULL,
+   turl varchar(255) NULL,
+   aid int NOT NULL,
+   PRIMARY KEY (tid),
+   FOREIGN KEY(aid) REFERENCES album(aid)
+);
+/*创建好友关系表*/

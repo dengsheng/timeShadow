@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.snow.dao.UserDao;
 
 import com.snow.model.Album;
+import com.snow.model.Image;
 import com.snow.model.User;
 import com.snow.service.UserService;
 
@@ -39,6 +40,18 @@ public class UserServiceImpl implements UserService{
 	public List<Album> getAllProblems(int uid) {
 		// TODO Auto-generated method stub
 		return userDao.getAllAlbums(uid);
+	}
+
+	@Override
+	public boolean createAlbum(Album album) {
+		// TODO Auto-generated method stub
+		return userDao.createAlbum(album);
+	}
+
+	@Override
+	public boolean uploadImg(Image image) {
+		// TODO Auto-generated method stub
+		return userDao.uploadImg(image);
 	}
 
 }

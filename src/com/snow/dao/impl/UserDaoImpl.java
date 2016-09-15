@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.snow.dao.UserDao;
 import com.snow.model.Album;
 import com.snow.model.AlbumMapper;
+import com.snow.model.Image;
 import com.snow.model.User;
 import com.snow.model.UserMapper;
 
@@ -77,5 +78,31 @@ public class UserDaoImpl implements UserDao{
 		RowMapper<Album> albumMapper = new AlbumMapper();
 		List<Album> albums = template.query(sql, new Object[]{uid}, albumMapper);
 		return albums;
+	}
+	
+	/*创建相册*/
+	@Override
+	public boolean createAlbum(Album album) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO album(aname,adescription,adate,apv,uid) VALUES(?,?,?,?,?)";
+		int row = template.update(sql, new Object[]{album.getAlbumname(),album.getDescription(),album.getCreatedate(),album.getPv(),album.getUserid()});
+		if(row>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	/*上传照片*/
+	@Override
+	public boolean uploadImg(Image image) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO imgs(tname,turl,aid,tuploaddate) VALUES(?,?,?,?)";
+		int row = template.update(sql,new Object[]{image.getName(),image.getUrl(),image.getAid(),image.getCreatedate()});
+		if(row>0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

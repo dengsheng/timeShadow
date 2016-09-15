@@ -43,21 +43,51 @@
 <!--创建相册模态框-->
 <div class="modal fade" id="createalbum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" >
 		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal=header">
+			<form class="modal-content form-horizontal" action="album+" method="POST">
+				<div class="modal-header">
 					 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 						 <h4 class="modal-title" id="myModalLabel">创建相册</h4>
 				</div>
-				<div class="modal-body">
-					<input type="text" name="albumname" placeholder="相册名"/>
+				<div class="modal-body form-group">
+					<label for="albumname" class="control-label">相册名</label>
+					<input type="text" name="albumname" id="albumname" class="form-control" placeholder="相册名" maxlength="100" required />			
+				
+					<label for="description" class="control-label">描述</label>
+					<input name="description" id="description" class="form-control" placeholder="相册描述" />		
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						 <button type="submit" class="btn btn-primary">创建</button>
 				</div>
-			</div>
+			</form>
 		</div>
 </div>		
+
+<!--上传照片-->
+<div class="modal fade" id="uploadimage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" >
+		<div class="modal-dialog">
+			<form class="modal-content form-horizontal" action="upload" method="POST" enctype="multipart/form-data">
+				<div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						 <h4 class="modal-title" id="myModalLabel">上传照片</h4>
+				</div>
+				<div class="modal-body form-group">
+					<input type="file" name="file" id="file"   />			
+					<select class="form-control">
+						<c:if test="${!empty albums}">
+							<c:forEach var="album" items="${albums}">
+								<option>${album.albumname}</option>
+							</c:forEach>
+							</c:if>
+					</select>
+					<button type="submit" class="btn btn-primary">上传</button>	
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</form>
+		</div>
+</div>	
 	<div id="time-offcanvass">
 		<a href="#" class="time-offcanvass-close js-time-offcanvass-close">Menu <i class="icon-cross"></i> </a>
 		<h1 class="time-logo"><a class="navbar-brand" href="index.html">Snow</a></h1>
@@ -94,7 +124,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
-					<h2>相册</h2><button class="btn btn-priamry btn-lg" type="button" data-toggle="modal" data-target="#createalbum" >创建相册</button>
+					<h2>相册</h2>
+
+					<button class="btn btn-priamry btn-lg" type="button" data-toggle="modal" data-target="#createalbum" >创建相册</button>
+					<button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#uploadimage">上传照片</button>
+
 						
 						<div class="fh5co-spacer fh5co-spacer-sm"></div>
 						<div class="row">

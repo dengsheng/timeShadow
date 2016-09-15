@@ -3,6 +3,7 @@ package com.snow.dao;
 import java.util.List;
 
 import com.snow.model.Album;
+import com.snow.model.Image;
 import com.snow.model.User;
 
 public interface UserDao {
@@ -13,5 +14,9 @@ public interface UserDao {
 	public boolean amessage(String ousername,String username,String descriptions);
 	
 	public List<Album> getAllAlbums(int uid);
+	
+	public boolean createAlbum(Album album);
+	
+	public boolean uploadImg(Image image);
 
 }
