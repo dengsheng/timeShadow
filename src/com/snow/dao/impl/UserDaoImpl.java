@@ -14,6 +14,8 @@ import com.snow.dao.UserDao;
 import com.snow.model.Album;
 import com.snow.model.AlbumMapper;
 import com.snow.model.Image;
+import com.snow.model.ImageMapper;
+import com.snow.model.Page;
 import com.snow.model.User;
 import com.snow.model.UserMapper;
 
@@ -104,5 +106,24 @@ public class UserDaoImpl implements UserDao{
 		}else{
 			return false;
 		}
+	}
+	
+	/*计算总照片数量*/
+	@Override
+	public int countImage() {
+		// TODO Auto-generated method stub
+		String sql = "SELECT count(*) from imgs";
+		int row = template.queryForObject(sql,Integer.class);
+		return row;
+	}
+
+	/*获取照片*/
+	@Override
+	public List<Image> findImg(Page page) {
+		// TODO Auto-generated method stub
+		String sql = "select * from imgs limit ?,?";
+		RowMapper<Image> imgmap = new ImageMapper();
+		List<Image> imglist = template.query(sql,new Object[]{page.getBegin(),page.getPageSize()},imgmap);
+		return imglist;
 	}
 }

@@ -10,6 +10,7 @@ import com.snow.dao.UserDao;
 
 import com.snow.model.Album;
 import com.snow.model.Image;
+import com.snow.model.Page;
 import com.snow.model.User;
 import com.snow.service.UserService;
 
@@ -52,6 +53,18 @@ public class UserServiceImpl implements UserService{
 	public boolean uploadImg(Image image) {
 		// TODO Auto-generated method stub
 		return userDao.uploadImg(image);
+	}
+
+	@Override
+	public int countImage() {
+		// TODO Auto-generated method stub
+		return userDao.countImage();
+	}
+
+	@Override
+	public List<Image> findImg(Page page) {
+		// TODO Auto-generated method stub
+		return userDao.findImg(page);
 	}
 
 }

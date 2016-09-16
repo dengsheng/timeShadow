@@ -8,11 +8,14 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+//import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,7 +29,7 @@ import com.snow.service.UserService;
 
 @Controller
 public class mvcController {
-
+	private JdbcTemplate template;
 	@Resource
 	private UserService userService;
 	
@@ -144,9 +147,8 @@ public class mvcController {
     	}
     }
     /*上传照片*/
-    @RequestMapping("upload")
-    public ModelAndView uploade(
-			@RequestParam(value="file",required=false)MultipartFile[] files,
+    @RequestMapping("/upload.do")
+    public ModelAndView upload(@RequestParam(value="file",required=false)MultipartFile[] files,
 			HttpServletRequest request,Image image){
 		ModelAndView mav = new ModelAndView();
 		//获取路径本地上传图片路径
@@ -169,6 +171,11 @@ public class mvcController {
 				file.transferTo(targetFile);
 				String url = "upload/"+fileName;
 				image.setUrl(url);
+				image.setCreatedate(new Date());
+				image.setName(request.getParameter("name"));
+				image.setAid(1);
+				//image.setAid(template.queryForObject("SELECT aid FROM album where aname=?", new Object[]{request.getParameter("albumname")}, Integer.class));
+				//image.setAid(template.query("SELECT aid FROM album where aname=?",new Object[]{request.getParameter("albumname")}));
 				//调用dao层方法，执行图片上传操作
 				userService.uploadImg(image);	
 			}catch (Exception e) {
@@ -183,9 +190,9 @@ public class mvcController {
     @RequestMapping(value=("/findPage.do"),method=RequestMethod.GET)
 	public ModelAndView fingPage(HttpServletRequest request,Image image,Page page){
 		ModelAndView mav = new ModelAndView();
-		List<Image> list = imagedao.findImg(page);
+		List<Image> list = userService.findImg(page);//获取所有照片
 		int totalpage = 0;//总共的页数
-		int rows = imageservice.countImage();//总记录数
+		int rows = userService.countImage();//总记录(照片)数
 		//判断总记录数与每页显示的数取余   算法
 	    if(rows%page.getPageSize() == 0){
 		   totalpage=rows/page.getPageSize();//赋值给总页数
@@ -193,7 +200,7 @@ public class mvcController {
 		   totalpage=rows/page.getPageSize()+1;
 	    }
 		mav.addObject("totalpage", totalpage);
-		mav.addObject("courentpage", page.getPage());//当前页数
+		mav.addObject("currentpage", page.getPage());//当前页数
 		mav.addObject("list",list);
 		mav.setViewName("/result");
 		return mav;
