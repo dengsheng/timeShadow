@@ -24,4 +24,6 @@ public interface UserDao {
 
 	public List<Image> findImg(Page page);
 
+	public int getAid(String albumname);
+
 }

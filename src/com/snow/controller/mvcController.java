@@ -153,6 +153,7 @@ public class mvcController {
 		ModelAndView mav = new ModelAndView();
 		//获取路径本地上传图片路径
 		String path=request.getSession().getServletContext().getRealPath("upload");
+		String albumname = request.getParameter("albumname");
 		path = path.replaceAll("\\\\", "/");
 		for(MultipartFile file:files){
 			//获取文件名
@@ -173,7 +174,9 @@ public class mvcController {
 				image.setUrl(url);
 				image.setCreatedate(new Date());
 				image.setName(request.getParameter("name"));
-				image.setAid(1);
+				System.out.println(request.getParameter("albumname"));
+				System.out.println(userService.getAid(albumname));
+				image.setAid(userService.getAid(albumname));
 				//image.setAid(template.queryForObject("SELECT aid FROM album where aname=?", new Object[]{request.getParameter("albumname")}, Integer.class));
 				//image.setAid(template.query("SELECT aid FROM album where aname=?",new Object[]{request.getParameter("albumname")}));
 				//调用dao层方法，执行图片上传操作
@@ -205,6 +208,12 @@ public class mvcController {
 		mav.setViewName("/result");
 		return mav;
 	}
+    
+    /*好友*/
+    @RequestMapping("friends")
+    public String friends(){
+    	return "friends";
+    }
     
     /*关于开发者*/
     @RequestMapping("about")

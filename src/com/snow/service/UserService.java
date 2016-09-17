@@ -25,4 +25,6 @@ public interface UserService {
 
 	public List<Image> findImg(Page page);
 	
+	public int getAid(String albumname);
+	
 }

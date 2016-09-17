@@ -119,11 +119,20 @@ public class UserDaoImpl implements UserDao{
 
 	/*获取照片*/
 	@Override
-	public List<Image> findImg(Page page) {
+	public List<Image> findImg(Page page){
 		// TODO Auto-generated method stub
 		String sql = "select * from imgs limit ?,?";
 		RowMapper<Image> imgmap = new ImageMapper();
 		List<Image> imglist = template.query(sql,new Object[]{page.getBegin(),page.getPageSize()},imgmap);
 		return imglist;
+	}
+	
+	/*获取相册编号*/
+	@Override
+	public int getAid(String albumname) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT aid from album where aname = ?";
+		int rs = template.queryForObject(sql, new Object[]{albumname}, Integer.class);
+		return rs;
 	}
 }

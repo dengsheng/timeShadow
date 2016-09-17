@@ -44,7 +44,7 @@
 		<ul>
 			<li class="active"><a href="#">主页</a></li>
 			<li><a href="albums">相册</a></li>
-			<li><a href="#">好友</a></li>
+			<li><a href="friends">好友</a></li>
 			<li><a href="#">我的时光海苔</a></li>
 			<li><a href="message">信息管理</a></li>
 		</ul>

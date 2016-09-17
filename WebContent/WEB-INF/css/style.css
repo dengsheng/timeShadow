@@ -614,5 +614,15 @@ a > img.fh5co-align-center {
   font-weight:bold;
 }
 
+/*相册详细页*/
+div.album-imgs div.imgs{
+  overflow:hidden;
+}
+div#page-tag{
+  width:100%;
+  padding-left:43%;
+}
+
+
 
 /*# sourceMappingURL=style.css.map */

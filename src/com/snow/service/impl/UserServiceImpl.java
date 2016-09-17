@@ -67,4 +67,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.findImg(page);
 	}
 
+	@Override
+	public int getAid(String albumname) {
+		// TODO Auto-generated method stub
+		return userDao.getAid(albumname);
+	}
+
 }
