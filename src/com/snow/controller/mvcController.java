@@ -50,6 +50,11 @@ public class mvcController {
 		u.setUsername(username);
 		u.setPassword(password);
 		User user = userService.login(u);
+		if(session.getAttribute("username") != null){
+			modelAndView.addObject("user",user);
+			modelAndView.setViewName("/index");
+			return modelAndView;
+		}
 		//判断用户是否存在
 		if (user != null) {
 			if(user.getPassword().equals(" ")== false){
@@ -91,9 +96,9 @@ public class mvcController {
     public String amessage(HttpSession session,String username,String descriptions){
     	String ousername = (String)session.getAttribute("username");
     	if(userService.amessage(ousername, username, descriptions)){
-    		return "message";
+    		return "redirect:/message";
     	}else{
-    		return "message";
+    		return "redirect:/message";
     	}
     	
     }
@@ -141,9 +146,9 @@ public class mvcController {
     	album.setPv(0);
     	album.setUserid(Integer.parseInt(session.getAttribute("id").toString()));
     	if(userService.createAlbum(album)){
-    		return "albums";
+    		return "redirect:/albums";
     	}else{
-    		return "albums";
+    		return "redirect:/albums";
     	}
     }
     /*上传照片*/
@@ -213,6 +218,13 @@ public class mvcController {
     @RequestMapping("friends")
     public String friends(){
     	return "friends";
+    }
+    /*添加好友*/
+    @RequestMapping("addFriend")
+    public String addFriend(String name){
+    	System.out.println(name);
+    	System.out.println("test");
+    	return "redirect:/friends";
     }
     
     /*关于开发者*/

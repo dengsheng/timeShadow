@@ -88,7 +88,7 @@
        </div>
 	</div>
 
-	<footer id="fh5co-footer">
+	<footer id="time-footer">
 		<div class="container">
 			<div class="row row-padded">
 				<div class="col-md-12 text-center">

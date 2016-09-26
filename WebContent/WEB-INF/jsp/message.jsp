@@ -64,8 +64,8 @@
 					<a href="#" class="time-menu-btn js-time-menu-btn adapt-message glyphicon glyphicon-pencil"></a>
 					<a class="navbar-brand" href="#">
 						<% 
-							Object username = session.getAttribute("username");
-							Object descriptions = session.getAttribute("descriptions");
+							String username = (String)session.getAttribute("username");
+							String descriptions = (String)session.getAttribute("descriptions");
 							out.println(username);
 						%>
 					</a>		
@@ -86,9 +86,7 @@
 					    <h3 class="panel-title">姓名</h3>
 					  </div>
 					  <div class="panel-body">
-						<% 
-							out.println(username);
-						%>	
+						<%=username %>	
 					  </div>
 					</div>			
 				</div>
@@ -98,9 +96,7 @@
 					    <h3 class="panel-title">个性签名</h3>
 					  </div>
 					  <div class="panel-body">
-						<% 
-							out.println(descriptions);
-						%>	
+						<%=descriptions %>	
 					  </div>
 					</div>					
 				</div>
@@ -112,7 +108,7 @@
        </div>
 	</div>
 
-	<footer id="fh5co-footer">
+	<footer id="time-footer">
 		<div class="container">
 			<div class="row row-padded">
 				<div class="col-md-12 text-center">

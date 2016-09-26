@@ -103,9 +103,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<a href="#" class="time-offcanvass-close js-time-offcanvass-close">Menu <i class="icon-cross"></i> </a>
 	<h1 class="time-logo"><a class="navbar-brand" href="index.html">Snow</a></h1>
 	<ul>
-		<li><a href="#">主页</a></li>
+		<li><a href="index">主页</a></li>
 		<li class="active"><a href="#">相册</a></li>
-		<li><a href="#">好友</a></li>
+		<li><a href="friends">好友</a></li>
 		<li><a href="#">我的时光海苔</a></li>
 		<li><a href="message">信息管理</a></li>
 	</ul>
@@ -163,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 
 <!--底部-->
-<footer id="fh5co-footer">
+<footer id="time-footer">
 	<div class="container">
 		<div class="row row-padded">
 			<div class="col-md-12 text-center">

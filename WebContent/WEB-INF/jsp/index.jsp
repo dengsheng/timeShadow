@@ -2,6 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+<%
+	String username = (String)session.getAttribute("username");
+ %>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -10,7 +14,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>${user.username} &mdash; ${user.descriptions}</title>
+	<title><%=username %> &mdash; ${user.descriptions}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="这是一个多用户照片分享系统" />
 	<meta name="keywords" content="照片,时光留影,分享,记录" />
@@ -40,7 +44,7 @@
 		
 	<div id="time-offcanvass">
 		<a href="#" class="time-offcanvass-close js-time-offcanvass-close">Menu <i class="icon-cross"></i> </a>
-		<h1 class="time-logo"><a class="navbar-brand" href="#">${user.username}</a></h1>
+		<h1 class="time-logo"><a class="navbar-brand" href="#"><%=username %></a></h1>
 		<ul>
 			<li class="active"><a href="#">主页</a></li>
 			<li><a href="albums">相册</a></li>
@@ -60,7 +64,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<a href="#" class="time-menu-btn js-time-menu-btn">Menu <i class="icon-menu"></i></a>
-					<a class="navbar-brand" href="#">${user.username}</a>		
+					<a class="navbar-brand" href="#"><%=username %></a>		
 				</div>
 			</div>
 		</div>
