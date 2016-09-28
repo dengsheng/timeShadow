@@ -29,6 +29,7 @@ import com.snow.service.UserService;
 
 @Controller
 public class mvcController {
+	@Resource
 	private JdbcTemplate template;
 	@Resource
 	private UserService userService;
@@ -96,9 +97,9 @@ public class mvcController {
     public String amessage(HttpSession session,String username,String descriptions){
     	String ousername = (String)session.getAttribute("username");
     	if(userService.amessage(ousername, username, descriptions)){
-    		return "redirect:/message";
+    		return "redirect:/amessage";
     	}else{
-    		return "redirect:/message";
+    		return "redirect:/amessage";
     	}
     	
     }
@@ -214,18 +215,43 @@ public class mvcController {
 		return mav;
 	}
     
+    /*照片详情页*/
+    @RequestMapping("img")
+    public String imgs(){
+    	return "img";
+    }
     /*好友*/
     @RequestMapping("friends")
-    public String friends(){
+    public String friends(HttpSession session,Model model){
+    	String name = (String) session.getAttribute("username");
+		if(userService.getAddf(name).size()>0){
+			model.addAttribute("addfs",userService.getAddf(name));
+		}
+		if(userService.getFriends(name).size()>0){
+			model.addAttribute("friends",userService.getFriends(name));
+		}
     	return "friends";
     }
     /*添加好友*/
     @RequestMapping("addFriend")
-    public String addFriend(String name){
-    	System.out.println(name);
-    	System.out.println("test");
-    	return "redirect:/friends";
+    public void addFriend(String who,String name){
+    	System.out.println(who+"请求添加"+name+"为好友");
+    	int row = template.update("INSERT INTO addf VALUES(?,?)",new Object[]{who,name});
     }
+    
+    /*处理好友请求*/
+    @RequestMapping("aFriend")
+    public ModelAndView aFriend(String user,String friend,String message){
+    	System.out.println(user+message+friend);
+    	if(message == "爽快的接受"){
+    		userService.acceptFriend(user,friend);
+    	}
+    	userService.deleteAdd(user,friend);
+		ModelAndView yesorno = new ModelAndView();
+		yesorno.setViewName("friends");
+    	return yesorno;
+    }
+    
     
     /*关于开发者*/
     @RequestMapping("about")

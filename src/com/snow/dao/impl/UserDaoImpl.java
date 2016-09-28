@@ -11,8 +11,11 @@ import org.springframework.stereotype.Repository;
 
 
 import com.snow.dao.UserDao;
+import com.snow.model.Addf;
+import com.snow.model.AddfMapper;
 import com.snow.model.Album;
 import com.snow.model.AlbumMapper;
+import com.snow.model.FriendMapper;
 import com.snow.model.Image;
 import com.snow.model.ImageMapper;
 import com.snow.model.Page;
@@ -135,4 +138,42 @@ public class UserDaoImpl implements UserDao{
 		int rs = template.queryForObject(sql, new Object[]{albumname}, Integer.class);
 		return rs;
 	}
+	
+	/*获取所有好友请求*/
+	@Override
+	public List<Addf> getAddf(String name) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM addf WHERE towho = ?";
+		RowMapper<Addf> addfMapper = new AddfMapper();
+		List<Addf> addfs = template.query(sql,new Object[]{name},addfMapper);
+		return addfs;
+	}
+	
+	/*删除请求*/
+	@Override
+	public void deleteAdd(String user, String friend) {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM addf WHERE who =? and towho =?";
+		int row = template.update(sql,new Object[]{friend,user});
+	}
+	
+	/*接受好友请求*/
+	@Override
+	public void acceptFriend(String user, String friend) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO friends(friend1,friend2) values(?,?)";
+		int row = template.update(sql,new Object[]{user,friend});
+	}
+	
+	/*获取所有好友*/
+	@Override
+	public List<Addf> getFriends(String name) {
+		String sql = "SELECT * FROM friends WHERE friend1 = ? or friend2 = ?";
+		RowMapper<Addf> addfMapper = new FriendMapper();
+		List<Addf> fris = template.query(sql,new Object[]{name,name},addfMapper);
+		return fris;
+	}
+	
+	
+	
 }

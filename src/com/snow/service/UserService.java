@@ -2,6 +2,7 @@ package com.snow.service;
 
 import java.util.List;
 
+import com.snow.model.Addf;
 import com.snow.model.Album;
 import com.snow.model.Image;
 import com.snow.model.Page;
@@ -26,5 +27,13 @@ public interface UserService {
 	public List<Image> findImg(Page page);
 	
 	public int getAid(String albumname);
+	
+	public List<Addf> getAddf(String name);
+	
+	public void deleteAdd(String user,String friend);
+
+	public void acceptFriend(String user, String friend);
+	
+	public List<Addf> getFriends(String name);
 	
 }

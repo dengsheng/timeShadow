@@ -70,7 +70,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<a href="#" class="time-menu-btn js-time-menu-btn">Menu <i class="icon-menu"></i></a>
-					<a class="navbar-brand" href="in
+					<a class="navbar-brand username" href="in
 					dex.html"><%=username %></a>		
 				</div>
 			</div>
@@ -90,7 +90,12 @@
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="friends">
-							
+							<c:if test="${!empty friends}">
+								<c:forEach var="friend" items="${friends}">
+									<img src="images/img_21.jpg" class="img-rounded" wdith="200" height="200"/>
+									<p>${friend.who}</p>
+								</c:forEach>
+							</c:if>
 						</div>
 						<div class="tab-pane fade" id="messages">
 							<p>好友留言</p>
@@ -124,8 +129,16 @@
 			</div>
 		</div>
 	</footer>
-
-
+	<div class="list-group add-message">
+		 <c:if test="${!empty addfs}">
+			<c:forEach var="addf" items="${addfs}">
+				<p href="#" class="list-group-item">
+		    			<b>${addf.who}</b>请求添加你为好友  <a class="btn btn-default">爽快的接受</a> || <a class="btn btn-primary">残忍的拒绝</a>
+		  		</p>
+			</c:forEach>
+		</c:if>
+	</div>
+	
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
@@ -142,15 +155,32 @@
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			/*发送好友请求*/
 			$(".btn-friends").bind("click",function(){
 				$.ajax({
 					url:"addFriend",
 					type:"POST",
 					data:{
+					    who:$(".username").html(),
 						name:$(".friend-name").val()
 					},
-					success:function(){
+					success:function(data){
 						alert("您的好友请求已成功发送");
+					}
+				});
+			});
+			/*处理好友请求*/
+			$(".add-message .btn").on("click",function(){
+				$.ajax({
+					url:"aFriend",
+					type:"POST",
+					data:{
+						user:$(".username").html(),
+						friend:$(this).parent().find("b").html(),
+						message:$(this).html()
+					},
+					success:function(data){
+						console.log(data);
 					}
 				});
 			});

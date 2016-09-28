@@ -41,7 +41,7 @@
 		});
 	};
 
-	// Magnific Popup
+	/* Magnific Popup
 	var magnifPopup = function() {
 		$('.image-popup').magnificPopup({
 			type: 'image',
@@ -67,7 +67,7 @@
 				}
 			}
 		});
-	};
+	};*/
 
 
 	
@@ -85,11 +85,8 @@
 
 	};
 
-	
-
-	
 	$(function(){
-		magnifPopup();
+		//magnifPopup();
 		offCanvass();
 		mobileMenuOutsideClick();
 		animateBoxWayPoint();

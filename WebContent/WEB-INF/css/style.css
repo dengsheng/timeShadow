@@ -623,6 +623,40 @@ div#page-tag{
   padding-left:43%;
 }
 
+/*好友添加动画*/
+div.add-message{
+	position:absolute;
+	bottom:0;
+	right:100px;
+  width:360px;
+}
+div.add-message p{
+  width:360px;
+  -webkit-animation:animations 1s ease-in forwards;
+  -moz-animation:animations 1s ease-in forwards;
+  animation:animations 1s ease-in forwards;
+}
+@-moz-keyframes animations{
+  0%{transform:-moz-translate(60px);opacity: 0.3;}
+  50%{transform:-moz-translate(35px);opacity: 0.5;}
+  70%{transform:-moz-translate(30px);opacity: 0.7}
+  100%{transform:-moz-translate(0px);opacity: 1;}
+}
+@-webkit-keyframes animations{
+  0%{transform:-webkit-translate(60px);opacity: 0.3;}
+  50%{transform:-webkit-translate(35px);opacity: 0.5;}
+  70%{transform:-webkit-translate(30px);opacity: 0.7}
+  100%{transform:-webkit-translate(0px);opacity: 1;}
+}
+@keyframes animations{
+  0%{transform:translate(60px);opacity: 0.3;}
+  50%{transform:translate(35px);opacity: 0.5;}
+  70%{transform:translate(30px);opacity: 0.7}
+  100%{transform:translate(0px);opacity: 1;}
+}
+div.add-message .btn{
+  font-size:10px; !important
+}
 
 
 /*# sourceMappingURL=style.css.map */

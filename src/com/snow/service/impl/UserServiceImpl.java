@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.snow.dao.UserDao;
 
+import com.snow.model.Addf;
 import com.snow.model.Album;
 import com.snow.model.Image;
 import com.snow.model.Page;
@@ -71,6 +72,30 @@ public class UserServiceImpl implements UserService{
 	public int getAid(String albumname) {
 		// TODO Auto-generated method stub
 		return userDao.getAid(albumname);
+	}
+
+	@Override
+	public List<Addf> getAddf(String name) {
+		// TODO Auto-generated method stub
+		return userDao.getAddf(name);
+	}
+
+	@Override
+	public void deleteAdd(String user, String friend) {
+		// TODO Auto-generated method stub
+		userDao.deleteAdd(user, friend);
+	}
+
+	@Override
+	public void acceptFriend(String user, String friend) {
+		// TODO Auto-generated method stub
+		userDao.acceptFriend(user, friend);
+	}
+
+	@Override
+	public List<Addf> getFriends(String name) {
+		// TODO Auto-generated method stub
+		return userDao.getFriends(name);
 	}
 
 }
