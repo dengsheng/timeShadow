@@ -41,7 +41,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--[if lt IE 9]>
 <script src="js/respond.min.js"></script>
 <![endif]-->
-
+<style type="text/css">
+	a.in{
+		position:absolute;top:30%;left:35%;width:80px;height:40px;display:none;
+		background:yellow;
+	}
+	.show{
+		display:block;
+	}
+</style>
 </head>
 <body>
 
@@ -89,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</c:forEach>
 					</c:if>
 				</select>
-				<input type="text" name="name" />
+				<input type="text" name="name" placeholder="名字" />
 				<input type="submit" class="btn btn-primary" value="上传"/>
 			</div>
 			<div class="modal-footer">
@@ -152,6 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								height="220">
 								<h3>${album.albumname}</h3>
 								<div class="albums-see">${album.pv}</div>
+								<a class="btn btn-default in" href="findPage.do?id=${album.id}">In</a>
 							</div>
 						</div>
 					</c:forEach>
@@ -198,5 +207,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/salvattore.min.js"></script>
 <!-- Main JS -->
 <script src="js/main.js"></script>
+<script>
+	$(function(){
+		$("img").on('mouseover',function(){
+			$(this).parent().find("a").toggleClass("show");
+		});
+		
+	});
+</script>
 </body>
 </html>

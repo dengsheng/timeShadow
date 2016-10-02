@@ -197,11 +197,13 @@ public class mvcController {
     
     /*相册详细页*/
     @RequestMapping(value=("/findPage.do"),method=RequestMethod.GET)
-	public ModelAndView fingPage(HttpServletRequest request,Image image,Page page){
+	public ModelAndView fingPage(HttpServletRequest request,Image image,Page page,String id){
+    	//System.out.println(id);
+    	int aid = Integer.parseInt(id);
 		ModelAndView mav = new ModelAndView();
-		List<Image> list = userService.findImg(page);//获取所有照片
+		List<Image> list = userService.findImg(page,aid);//获取所有照片
 		int totalpage = 0;//总共的页数
-		int rows = userService.countImage();//总记录(照片)数
+		int rows = userService.countImage(aid);//总记录(照片)数
 		//判断总记录数与每页显示的数取余   算法
 	    if(rows%page.getPageSize() == 0){
 		   totalpage=rows/page.getPageSize();//赋值给总页数
@@ -216,8 +218,11 @@ public class mvcController {
 	}
     
     /*照片详情页*/
-    @RequestMapping("img")
-    public String imgs(){
+    @RequestMapping(value=("/img"),method=RequestMethod.GET)
+    public String imgs(String id,Model model){
+    	int iid = Integer.parseInt(id);
+    	Image img = userService.findImgOne(iid);
+    	model.addAttribute("img", img);
     	return "img";
     }
     /*好友*/
@@ -243,7 +248,7 @@ public class mvcController {
     @RequestMapping("aFriend")
     public ModelAndView aFriend(String user,String friend,String message){
     	System.out.println(user+message+friend);
-    	if(message == "爽快的接受"){
+    	if(message.equals("爽快的接受")){
     		userService.acceptFriend(user,friend);
     	}
     	userService.deleteAdd(user,friend);

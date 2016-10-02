@@ -62,7 +62,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<a href="#" class="time-menu-btn js-time-menu-btn adapt-message glyphicon glyphicon-pencil"></a>
-					<a class="navbar-brand" href="#">
+					<a class="navbar-brand" href="index">
 						<% 
 							String username = (String)session.getAttribute("username");
 							String descriptions = (String)session.getAttribute("descriptions");

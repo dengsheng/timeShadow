@@ -53,9 +53,9 @@
     <div class="daily-img">
         <div>
             <a class="image-popup border-image">
-                <img src="images/snow.jpg" width="500" height="350">
+                <img src="images/img_20.jpg" width="500" height="350">
             </a>
-            <div class="descriptions">snow deng!拜拜啦 &nbsp; &nbsp;<span class="time">2016/9/8</span> &nbsp;&nbsp; <b class="author">snow</b></div>
+            <div class="descriptions">勺 &nbsp; ❤ &nbsp;<span class="time">2016/9/29</span> &nbsp;&nbsp; <b class="author">snow</b></div>
         </div>
     </div>
 

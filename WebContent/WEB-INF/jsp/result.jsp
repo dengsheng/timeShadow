@@ -80,7 +80,7 @@ String username = (String)session.getAttribute("username");
        			<div id="time-board">
 				<c:forEach items="${list}" var="image">
 					<div class="col-md-3 imgs">
-						<img src="${basePath}${image.url}" class="img-responsive img-thumbnail">
+						<a href="img?id=${image.id}"><img src="${basePath}${image.url}" class="img-responsive img-thumbnail"></a>
 						<span>${image.name}</span>
 					</div>
 				</c:forEach>

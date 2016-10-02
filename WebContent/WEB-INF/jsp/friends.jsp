@@ -92,8 +92,13 @@
 						<div class="tab-pane fade active in" id="friends">
 							<c:if test="${!empty friends}">
 								<c:forEach var="friend" items="${friends}">
-									<img src="images/img_21.jpg" class="img-rounded" wdith="200" height="200"/>
-									<p>${friend.who}</p>
+									<img src="images/img_22.jpg" class="img-circle" wdith="100" height="100"/>
+									<c:if test="true" >
+										<p>${friend.to}</p>
+									</c:if>
+									<c:if test="${friend.to == '+<%=username %>+'}">
+										<p width="100">${friend.who}</p>
+									</c:if>
 								</c:forEach>
 							</c:if>
 						</div>

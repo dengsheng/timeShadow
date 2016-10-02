@@ -57,15 +57,15 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int countImage() {
+	public int countImage(int id) {
 		// TODO Auto-generated method stub
-		return userDao.countImage();
+		return userDao.countImage(id);
 	}
 
 	@Override
-	public List<Image> findImg(Page page) {
+	public List<Image> findImg(Page page,int id) {
 		// TODO Auto-generated method stub
-		return userDao.findImg(page);
+		return userDao.findImg(page,id);
 	}
 
 	@Override
@@ -96,6 +96,12 @@ public class UserServiceImpl implements UserService{
 	public List<Addf> getFriends(String name) {
 		// TODO Auto-generated method stub
 		return userDao.getFriends(name);
+	}
+
+	@Override
+	public Image findImgOne(int id) {
+		// TODO Auto-generated method stub
+		return userDao.findImgOne(id);
 	}
 
 }

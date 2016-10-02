@@ -16,6 +16,7 @@ public class ImageMapper implements RowMapper<Image>{
 		image.setName(rs.getString("tname"));
 		image.setUrl(rs.getString("turl"));
 		image.setCreatedate(rs.getDate("tuploaddate"));
+		image.setPv(rs.getInt("tpv"));
 		return image;
 	}
 	

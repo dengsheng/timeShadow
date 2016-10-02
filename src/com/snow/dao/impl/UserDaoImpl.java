@@ -113,20 +113,20 @@ public class UserDaoImpl implements UserDao{
 	
 	/*计算总照片数量*/
 	@Override
-	public int countImage() {
+	public int countImage(int id) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT count(*) from imgs";
-		int row = template.queryForObject(sql,Integer.class);
+		String sql = "SELECT count(*) from imgs where aid = ?";
+		int row = template.queryForObject(sql,new Object[]{id},Integer.class);
 		return row;
 	}
 
 	/*获取照片*/
 	@Override
-	public List<Image> findImg(Page page){
+	public List<Image> findImg(Page page,int id){
 		// TODO Auto-generated method stub
-		String sql = "select * from imgs limit ?,?";
+		String sql = "select * from imgs  where aid = ? limit ?,?";
 		RowMapper<Image> imgmap = new ImageMapper();
-		List<Image> imglist = template.query(sql,new Object[]{page.getBegin(),page.getPageSize()},imgmap);
+		List<Image> imglist = template.query(sql,new Object[]{id,page.getBegin(),page.getPageSize()},imgmap);
 		return imglist;
 	}
 	
@@ -172,6 +172,15 @@ public class UserDaoImpl implements UserDao{
 		RowMapper<Addf> addfMapper = new FriendMapper();
 		List<Addf> fris = template.query(sql,new Object[]{name,name},addfMapper);
 		return fris;
+	}
+
+	@Override
+	public Image findImgOne(int id) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM imgs WHERE tid =?";
+		RowMapper<Image> imgmap = new ImageMapper();
+		List<Image> img = template.query(sql,new Object[]{id},imgmap);
+		return img.get(0);
 	}
 	
 	

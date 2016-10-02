@@ -2,6 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+
+	request.getServerName()+":"+request.getServerPort()+path+"/";
+request.setAttribute("basePath",basePath);
+%>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -74,7 +81,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
-					<img src="images/img_30.jpg">
+					<img src="${basePath}${img.url}">
 					<div id="discusses">
 						
 					</div>

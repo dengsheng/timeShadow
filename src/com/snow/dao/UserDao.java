@@ -21,9 +21,9 @@ public interface UserDao {
 	
 	public boolean uploadImg(Image image);
 
-	public int countImage();
+	public int countImage(int id);
 
-	public List<Image> findImg(Page page);
+	public List<Image> findImg(Page page,int id);
 
 	public int getAid(String albumname);
 	
@@ -34,4 +34,6 @@ public interface UserDao {
 	public void acceptFriend(String user,String friend);
 	
 	public List<Addf> getFriends(String name);
+	
+	public Image findImgOne(int id);
 }

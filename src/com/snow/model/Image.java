@@ -8,6 +8,7 @@ public class Image {
 	private String url;
 	private int aid;
 	private Date createdate;
+	private int pv;
 	
 	public int getId(){
 		return id;
@@ -38,5 +39,11 @@ public class Image {
 	}
 	public void setCreatedate(Date createdate){
 		this.createdate = createdate;
+	}
+	public int getPv(){
+		return pv;
+	}
+	public void setPv(int pv){
+		this.pv = pv;
 	}
 }
