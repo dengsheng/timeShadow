@@ -41,7 +41,21 @@ String username = (String)session.getAttribute("username");
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
+	<style type="text/css">
+		div.imgs button{
+			display:none;
+		}
+		div.imgs textarea{
+			display:none;
+			width:200px;
+		}
+		div.imgs:hover button{
+			display:block;
+		}
+		div.imgs:hover textarea{
+			display:block;
+		}
+	</style>
 	</head>
 	<body>
 		
@@ -53,9 +67,9 @@ String username = (String)session.getAttribute("username");
 			<li><a href="albums">相册</a></li>
 			<li><a href="friends">好友</a></li>
 			<li><a href="history">我的时光海苔</a></li>
-			<li><a href="amessage">关于</a></li>
+			<li><font face="Adobe Arabic"><a href="message">信息管理</a></font></li>
 		</ul>
-		<h3 class="fh5co-lead">Connect with us</h3>
+		<h3 class="time-lead">Connect with us</h3>
 		<p class="time-social-icons">
 			<a href="#"><i class="icon-renren"></i></a>
 			<a href="#"><i class="icon-sina-weibo"></i></a>
@@ -82,6 +96,8 @@ String username = (String)session.getAttribute("username");
 					<div class="col-md-3 imgs">
 						<a href="img?id=${image.id}"><img src="${basePath}${image.url}" class="img-responsive img-thumbnail"></a>
 						<span>${image.name}</span>
+						<button class="btn btn-primary share" style="position:absolute;left:0;top:0;background:white;color:black;" name=${image.id}>share</button>
+						<textarea rows="3" class="form-control" style="position:absolute;left:0;top:40px;"></textarea>
 					</div>
 				</c:forEach>
         		</div>
@@ -141,7 +157,24 @@ String username = (String)session.getAttribute("username");
 	<script src="js/salvattore.min.js"></script>
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
-
+	<script type="text/javascript">
+			$(function(){
+					$(".share").click(function(){
+						$.ajax({
+							url:"share",
+							type:"POST",
+							data:{id:$(this).attr("name"),desc:$(this).parent().find("textarea").val()},
+							cache:false,
+							success:function(){
+								console.log("share success");
+							},
+							error:function(){
+								console.log("share failed");
+							}
+						});
+					});
+			});
+	</script>
 	
 
 	

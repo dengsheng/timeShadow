@@ -104,4 +104,18 @@ public class UserServiceImpl implements UserService{
 		return userDao.findImgOne(id);
 	}
 
+	@Override
+	public void shareImg(int id, String desc) {
+		// TODO Auto-generated method stub
+		userDao.shareImg(id, desc);
+	}
+
+	@Override
+	public List<Image> findShareImg() {
+		// TODO Auto-generated method stub
+		return userDao.findShareImg();
+	}
+	
+	
+
 }

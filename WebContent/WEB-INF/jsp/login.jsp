@@ -2,6 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+
+	request.getServerName()+":"+request.getServerPort()+path+"/";
+request.setAttribute("basePath",basePath);
+Object img = session.getAttribute("img");
+String user = (String)session.getAttribute("user");
+%>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -53,9 +62,9 @@
     <div class="daily-img">
         <div>
             <a class="image-popup border-image">
-                <img src="images/img_20.jpg" width="500" height="350">
+                <img src="${basePath}${img.url}" width="500" height="350">
             </a>
-            <div class="descriptions">勺 &nbsp; ❤ &nbsp;<span class="time">2016/9/29</span> &nbsp;&nbsp; <b class="author">snow</b></div>
+            <div class="descriptions">${img.desc}<span class="time">${img.createdate}</span> &nbsp;&nbsp; <b class="author">${user}</b></div>
         </div>
     </div>
 

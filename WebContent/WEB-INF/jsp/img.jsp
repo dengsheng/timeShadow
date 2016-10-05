@@ -41,9 +41,6 @@ request.setAttribute("basePath",basePath);
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
-<link rel="stylesheet" href="css/semantic.css" type="text/css" />
-<link rel="stylesheet" href="css/zyComment.css" type="text/css" />
 	
 	</head>
 	<body>
@@ -77,11 +74,11 @@ request.setAttribute("basePath",basePath);
 	</header>
 	<!-- END .header -->
 	
-	<div id="time-main">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<img src="${basePath}${img.url}">
+	<div id="time-main"><div align="left"> 
+		</div><div class="container"><div align="left"> 
+			</div><div class="row"><div align="left"> 
+				</div><div class="col-md-8 col-md-offset-2">
+					<img src="${basePath}${img.url}" width="800" height="300">
 					<div id="discusses">
 						
 					</div>
@@ -123,31 +120,8 @@ request.setAttribute("basePath",basePath);
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
 
-	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="js/zyComment.js"></script>
-
 	<script type="text/javascript">
-		var agoComment = [
-		                  {"id":1,"userName":"ada","time":"2014-04-04","sortID":0,"content":"不错的照片"},
-		                  {"id":2,"userName":"snow","time":"2014-04-04","sortID":0,"content":"我也觉得"},
-		                  {"id":3,"userName":"站长","time":"2014-04-04","sortID":1,"content":"第一条评论的回复"},
-		                  {"id":4,"userName":"站长","time":"2014-04-04","sortID":2,"content":"第二条评论的回复"},
-		                  {"id":5,"userName":"游客3","time":"2014-04-04","sortID":0,"content":"第三条评论"},
-		                  {"id":6,"userName":"游客2","time":"2014-04-04","sortID":4,"content":"第二条评论的回复的回复"},
-		                  ];
-		$("#discusses").zyComment({
-			"width":"355",
-			"height":"33",
-			"agoComment":agoComment,
-			"callback":function(comment){
-				console.info("填写内容返回值：");
-				console.info(comment);
-
-				// 添加新的评论
-				$("#articleComment").zyComment("setCommentAfter",{"id":123, "name":"name", "content":"content", "time":"2014-04-14"});
-
-			}
-		});
+		
 	</script>
 	</body>
 </html>

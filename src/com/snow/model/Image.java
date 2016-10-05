@@ -9,6 +9,8 @@ public class Image {
 	private int aid;
 	private Date createdate;
 	private int pv;
+	private String desc;
+	public String status;
 	
 	public int getId(){
 		return id;
@@ -45,5 +47,17 @@ public class Image {
 	}
 	public void setPv(int pv){
 		this.pv = pv;
+	}
+	public String getDesc(){
+		return desc;
+	}
+	public void setDesc(String desc){
+		this.desc = desc;
+	}
+	public String getStatus(){
+		return status;
+	}
+	public void setStatus(String status){
+		this.status = status;
 	}
 }

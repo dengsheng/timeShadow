@@ -2,9 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<%
-	String username = (String)session.getAttribute("username");
- %>
+ <%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+
+	request.getServerName()+":"+request.getServerPort()+path+"/";
+request.setAttribute("basePath",basePath);
+String username = (String)session.getAttribute("username");
+%>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -14,7 +18,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title><%=username %> &mdash; ${user.descriptions}</title>
+	<title><%=username %></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="这是一个多用户照片分享系统" />
 	<meta name="keywords" content="照片,时光留影,分享,记录" />
@@ -38,7 +42,11 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
+	<style type="text/css">
+		.show{
+			display:block;
+		}
+	</style>
 	</head>
 	<body>
 		
@@ -77,15 +85,22 @@
 			<div class="row">
 
        			<div id="time-board" data-columns>
+       			
+       			<c:forEach items="${imgs}" var="image">
 
         			<div class="item">
         				<div class="animate-box">
-	        				<a href="images/img_1.jpg" class="image-popup time-board-img" title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, eos?"><img src="images/img_1.jpg" alt="时光流影"></a>
+	        				<a href="${basePath}${image.url}" class="image-popup time-board-img" title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, eos?"><img src="${basePath}${image.url}" alt="时光流影"></a>
         				</div>
-        				<div class="time-desc">来钓鱼了。</div>
-        				<div class="time-state">2016/9/8  <b>snow</b> &nbsp; &nbsp;<i class="glyphicon glyphicon-eye-open time-see">333</i></div>
+        				<div class="time-desc">${image.desc}</div>
+        				<div class="time-state">${image.createdate} <b>snow</b> &nbsp; &nbsp;<i class="glyphicon glyphicon-eye-open time-see">${image.pv}</i><button class="btn btn-default open-comment" style="margin-left:10px;width:10px;height:10px;line-height:10px;"></button></div>
+        				<div class="discuss" style="display:none;">
+        				
+        						<input class="form-control" type="text" />
+        						<button class="btn btn-default submit-comment" type="submit">提交</button>
+        				</div>
         			</div>
-		   
+		   		</c:forEach>
         </div>
         </div>
        </div>
@@ -124,7 +139,18 @@
 	<script src="js/salvattore.min.js"></script>
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
-
+	<script>
+		$(function(){
+		
+			$(".open-comment").click(function(){
+				var comment = $(this).parent().parent().find("div.discuss");
+				comment.toggleClass("show");
+			});
+			$(".submit-comment").click(function(){
+				
+			});
+		});
+	</script>
 	
 
 	

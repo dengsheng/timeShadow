@@ -38,4 +38,8 @@ public interface UserService {
 	
 	public Image findImgOne(int id);
 	
+	public void shareImg(int id,String desc);
+
+	public List<Image> findShareImg();
+	
 }

@@ -1,5 +1,6 @@
 package com.snow.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -130,6 +131,8 @@ public class UserDaoImpl implements UserDao{
 		return imglist;
 	}
 	
+	
+	
 	/*获取相册编号*/
 	@Override
 	public int getAid(String albumname) {
@@ -173,7 +176,8 @@ public class UserDaoImpl implements UserDao{
 		List<Addf> fris = template.query(sql,new Object[]{name,name},addfMapper);
 		return fris;
 	}
-
+	
+	/*获取具体照片*/
 	@Override
 	public Image findImgOne(int id) {
 		// TODO Auto-generated method stub
@@ -181,6 +185,25 @@ public class UserDaoImpl implements UserDao{
 		RowMapper<Image> imgmap = new ImageMapper();
 		List<Image> img = template.query(sql,new Object[]{id},imgmap);
 		return img.get(0);
+	}
+	
+	/*分享照片*/
+	@Override
+	public void shareImg(int id, String desc) {
+		Date today = new Date();
+		// TODO Auto-generated method stub
+		String sql = "UPDATE imgs set tdesc=?,status=? ,tuploaddate=? WHERE tid =?";
+		int row = template.update(sql, new Object[]{desc,"share",today,id});
+	}
+	
+	/*获取分享照片*/
+	@Override
+	public List<Image> findShareImg() {
+		// TODO Auto-generated method stub
+		String sql = "select * from imgs where status =?";
+		RowMapper<Image> imgmap = new ImageMapper();
+		List<Image> imglist = template.query(sql,new Object[]{"share"},imgmap);
+		return imglist;
 	}
 	
 	

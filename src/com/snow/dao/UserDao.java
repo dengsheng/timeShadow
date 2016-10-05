@@ -36,4 +36,8 @@ public interface UserDao {
 	public List<Addf> getFriends(String name);
 	
 	public Image findImgOne(int id);
+	
+	public void shareImg(int id,String desc);
+
+	public List<Image> findShareImg();
 }

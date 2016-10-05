@@ -3,6 +3,7 @@ package com.snow.controller;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +37,18 @@ public class mvcController {
 	
 	/*登录页面*/
     @RequestMapping("/hello")
-    public String hello(){        
+    public String hello(HttpSession session){ 
+    	/*随机获取一张照片*/
+    	int count = template.queryForObject("SELECT COUNT(*) from imgs",Integer.class);
+    	Random random = new Random();
+    	int imgid = random.nextInt(count) + 1;
+    	Object user = template.queryForObject("SELECT uname FROM user WHERE uid in (SELECT uid from album WHERE aid in(SELECT aid FROM imgs WHERE tid=?))", new Object[]{imgid},Object.class);
+    	System.out.println(user);
+    	session.setAttribute("img",userService.findImgOne(imgid));
+    	session.setAttribute("user", user);
+    	/*
+    	model.addAttribute("img",userService.findImgOne(imgid));
+    	model.addAttribute("user", user);*/
         return "login";
     }
     
@@ -54,6 +66,8 @@ public class mvcController {
 		if(session.getAttribute("username") != null){
 			modelAndView.addObject("user",user);
 			modelAndView.setViewName("/index");
+			List<Image> limg = userService.findShareImg();
+			modelAndView.addObject("imgs", limg);
 			return modelAndView;
 		}
 		//判断用户是否存在
@@ -65,6 +79,8 @@ public class mvcController {
 				session.setAttribute("password", user.getPassword());
 				session.setAttribute("descriptions", user.getDescriptions());
 				session.setAttribute("email",user.getEmail());
+				List<Image> limg = userService.findShareImg();
+				modelAndView.addObject("imgs", limg);
 				modelAndView.setViewName("/index");//如果存在并且密码正确的话，返回到index.jsp页面
 				return modelAndView;
 			}else{
@@ -255,6 +271,15 @@ public class mvcController {
 		ModelAndView yesorno = new ModelAndView();
 		yesorno.setViewName("friends");
     	return yesorno;
+    }
+    
+    /*share*/
+    @RequestMapping("share")
+    public String share(String id,String desc){
+    	int tid = Integer.parseInt(id);
+    	System.out.println(id+""+desc);
+    	userService.shareImg(tid, desc);
+    	return "redirect:/hello";
     }
     
     
