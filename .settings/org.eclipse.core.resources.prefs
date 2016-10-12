@@ -1,4 +1,4 @@
-#Wed Sep 28 09:07:01 CST 2016
+#Mon Oct 10 15:01:27 CST 2016
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/jsp/about.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/albums.jsp=UTF-8
@@ -6,3 +6,4 @@ encoding//WebContent/WEB-INF/jsp/img.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/index.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/login.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/message.jsp=UTF-8
+encoding//src/com/geetest/sdk/java/GeetestLib.java=UTF-8

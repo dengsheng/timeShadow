@@ -13,7 +13,7 @@ request.setAttribute("basePath",basePath);
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns:wb="http://open.weibo.com/wb"> <!--<![endif]-->
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,13 +35,54 @@ request.setAttribute("basePath",basePath);
 	 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css">
 	<!-- Theme Style -->
 	<link rel="stylesheet" href="css/style.css">
+	
 	<!-- Modernizr JS(用于检验用户浏览器的html5和css3特性) -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below(让不懂爱的ie6-8支持css3 media query) -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	
+	<style>
+	    span{
+	    	cursor:pointer;
+	    }
+	    
+	    span.iid{
+	    	display:none;
+	    }
+		h3.comment-title,.item{
+		    padding-bottom:10px;
+			border-bottom:1px solid #eeeeee;
+		}
+		div.scomment{
+			width:500px;
+			height:120px;
+			border:1px solid #c7d4e1;
+			background:#c7d4e1;
+			border-radius:5px;
+		}
+		textarea{
+		    width:100%;
+		    height:70%;
+			appearance:none;
+			-webkit-appearance:none;
+			box-shadow:none;
+			resize:none;
+		    color:#999;
+		}
+		div.scomment button{
+			position:relative;
+			top:-10px;
+			left:84%;
+			outline:none;
+			width:80px;
+			border:1px solid #c5ced7;
+		    background-image: linear-gradient(#fbfbfc, #f5f7f9);
+		    color:#60676d;
+		    transition: all .15s linear;
+		    cursor:pointer;
+		}
+	</style>
 	</head>
 	<body>
 		
@@ -51,7 +92,7 @@ request.setAttribute("basePath",basePath);
 		<ul>
 			<li><a href="index">主页</a></li>
 			<li><a href="albums">相册</a></li>
-			<li><a href="friendsl">好友</a></li>
+			<li><a href="friends">好友</a></li>
 			<li><a href="#">我的时光海苔</a></li>
 			<li><a href="message">信息管理</a></li>
 		</ul>
@@ -67,21 +108,52 @@ request.setAttribute("basePath",basePath);
 			<div class="row">
 				<div class="col-md-12">
 					<a class="time-menu-btn js-time-menu-btn">Menu <i class="icon-menu"></i></a>
-					<a class="navbar-brand" href="index.html">SNOW</a>		
+					<a class="navbar-brand" href="index">SNOW</a>		
 				</div>
 			</div>
 		</div>
 	</header>
 	<!-- END .header -->
 	
-	<div id="time-main"><div align="left"> 
-		</div><div class="container"><div align="left"> 
-			</div><div class="row"><div align="left"> 
-				</div><div class="col-md-8 col-md-offset-2">
-					<img src="${basePath}${img.url}" width="800" height="300">
-					<div id="discusses">
-						
+	<div id="time-main">
+		<div class="container">
+		     <div class="row">
+	               <div class="col-md-8 col-md-offset-2">
+					  <img src="${basePath}${img.url}" width="500" height="333">
+					  <span class="iid">${iid}</span>
+					  <!--<h3><wb:share-button addition="number" type="button" serachPic=true></wb:share-button></h3>-->
+					  <!-- JiaThis Button BEGIN -->
+						<div class="jiathis_style">
+							<span class="jiathis_txt">分享到：</span>
+							<a class="jiathis_button_qzone">QQ空间</a>
+							<a class="jiathis_button_tsina">新浪微博</a>
+							<a class="jiathis_button_tqq">腾讯微博</a>
+							<a class="jiathis_button_weixin">微信</a>
+							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+							<a class="jiathis_counter_style"></a>
+						</div>
+						<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+						<!-- JiaThis Button END -->
+					  <div id="discusses">
+						 <h3 class="comment-title">大家的脚印</h3>
+						 <div class="commentitem">
+								<c:if test="${!empty comments}">
+									<c:forEach var="comment" items="${comments}">
+										<div class="item">
+											<b>${comment.name}</b>&nbsp;${comment.time}
+											<p>${comment.para}</p>
+											<span>回复</span>
+										</div>
+									</c:forEach>
+								</c:if>
+						 </div>
 					</div>
+					<div class="scomment">
+						 	<textarea class="yourcomment" placeholder="说点什么吧"></textarea>
+						 	<div>
+						 		<button class="submit-comment">发布</button>
+						 	</div>
+						 </div>
 				</div>
 			</div>
 		</div>
@@ -119,9 +191,40 @@ request.setAttribute("basePath",basePath);
 	<script src="js/salvattore.min.js"></script>
 	<!-- Main JS -->
 	<script src="js/main.js"></script>
-
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
 	<script type="text/javascript">
+		$(function(){
+			var jiathis_config = {
+		    shareImg:{
+		        "showType":"ALL",
+		        "bgColor":"",
+		        "txtColor":"",
+		        "text":"",
+		        "services":"",
+		        "position":"",
+		        "imgwidth":"",
+		        "imgheight":"",
+		        "divname":""
+		    	}
+			};
+			/*提交评论*/
+		    $(".submit-comment").click(function(){
+		    	$.ajax({
+		    		url:"comment",
+		    		type:"POST",
+		    		data:{para:$(".yourcomment").val(),iid:$(".iid").text()},
+		    		dataType:"json",
+		    		cache:false,
+		    		success:function(){
+		    			console.log("successed");
+		    		},
+		    		error:function(){
+		    			console.error("comment failed");
+		    		}
+		    	});
+		    });
+		});
 		
-	</script>
+</script>
 	</body>
 </html>

@@ -96,8 +96,6 @@ String username = (String)session.getAttribute("username");
 					<div class="col-md-3 imgs">
 						<a href="img?id=${image.id}"><img src="${basePath}${image.url}" class="img-responsive img-thumbnail"></a>
 						<span>${image.name}</span>
-						<button class="btn btn-primary share" style="position:absolute;left:0;top:0;background:white;color:black;" name=${image.id}>share</button>
-						<textarea rows="3" class="form-control" style="position:absolute;left:0;top:40px;"></textarea>
 					</div>
 				</c:forEach>
         		</div>
@@ -159,20 +157,7 @@ String username = (String)session.getAttribute("username");
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
 			$(function(){
-					$(".share").click(function(){
-						$.ajax({
-							url:"share",
-							type:"POST",
-							data:{id:$(this).attr("name"),desc:$(this).parent().find("textarea").val()},
-							cache:false,
-							success:function(){
-								console.log("share success");
-							},
-							error:function(){
-								console.log("share failed");
-							}
-						});
-					});
+					
 			});
 	</script>
 	

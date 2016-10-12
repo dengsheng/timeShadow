@@ -19,6 +19,9 @@
 		$('body').on('click', '.js-time-menu-btn, .js-time-offcanvass-close', function(){
 			$('#time-offcanvass').toggleClass('time-awake');
 		});
+		$('body').on('click', '#range', function(){
+			$('#imgs-offcanvass').toggleClass('time-awake');
+		});
 	};
 
 	// Click outside of offcanvass

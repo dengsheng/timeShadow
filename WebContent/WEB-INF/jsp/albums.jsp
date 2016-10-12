@@ -42,18 +42,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/respond.min.js"></script>
 <![endif]-->
 <style type="text/css">
-	a.in{
-		position:absolute;top:30%;left:35%;width:80px;height:40px;display:none;
-		background:yellow;
-	}
-	.show{
-		display:block;
-	}
+	
 </style>
 </head>
 <body>
 
-<!--创建相册模态框-->
+<!--创建相册-->
 <div class="modal fade" id="createalbum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" >
 	<div class="modal-dialog">
 		<form class="modal-content form-horizontal" action="album+" method="POST">
@@ -77,6 +71,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</form>
 	</div>
 </div>		
+
+<!--修改相册模态框-->
+<div class="modal fade" id="updatealbum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" >
+	<div class="modal-dialog">
+		<form class="modal-content form-horizontal" action="updatealbum" method="POST">
+			<div class="modal-header">
+				 <button type="button" class="close" data-dismiss="modal">
+				 	<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				 </button>
+				 <h4 class="modal-title" id="myModalLabel">修改相册</h4>
+			</div>
+			<div class="modal-body form-group">
+				
+				<select class="form-control" name="oldname">
+					<c:if test="${!empty albums}">
+						<c:forEach var="album" items="${albums}">
+							<option>${album.albumname}</option>
+						</c:forEach>
+					</c:if>
+				</select>
+				<label for="albumname" class="control-label">相册名</label>
+				<input type="text" name="albumname" id="albumname" class="form-control" placeholder="相册名" maxlength="100" required />	
+				<label for="description" class="control-label">描述</label>
+				<input name="description" id="description" class="form-control" placeholder="相册描述" />		
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">修改</button>
+				<button type="button" class="btn btn-danger delete-album">删除</button>
+			</div>
+		</form>
+	</div>
+</div>	
 
 <!--上传照片-->
 <div class="modal fade" id="uploadimage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" >
@@ -148,6 +175,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<button class="btn btn-priamry btn-lg" type="button" data-toggle="modal" data-target="#createalbum" >创建相册</button>
 				<button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#uploadimage">上传照片</button>
+				<button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#updatealbum">修改相册</button>
 
 					
 				<div class="fh5co-spacer fh5co-spacer-sm"></div>
@@ -156,11 +184,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<c:forEach var="album" items="${albums}">
 						<div class="col-md-4">
 							<div class="time-album-table">
-								<img src="images/img_27.jpg" width="99%"
-								height="220">
+								<a href="findPage.do?id=${album.id}"><img src="images/img_27.jpg" width="99%"
+								height="220"></a>
 								<h3>${album.albumname}</h3>
 								<div class="albums-see">${album.pv}</div>
-								<a class="btn btn-default in" href="findPage.do?id=${album.id}">In</a>
 							</div>
 						</div>
 					</c:forEach>
@@ -208,12 +235,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- Main JS -->
 <script src="js/main.js"></script>
 <script>
+	
 	$(function(){
-		$("img").on('mouseover',function(){
-			$(this).parent().find("a").toggleClass("show");
-		});
+		
 		
 	});
+	/*
+	$(function(){
+		$(".delete-album").click(function(){
+			$.ajax({
+				url:"deleteAlbum",
+				type:"POST",
+				cache:false,
+				data:{name:$(this).parent().parent().find("select").val()},
+				success:function(){
+					console.log("删除成功");
+				},
+				error:function(){
+					console.error("删除失败");
+				}
+			});
+			}
+		);
+	});*/
 </script>
 </body>
 </html>

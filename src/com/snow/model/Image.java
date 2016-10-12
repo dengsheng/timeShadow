@@ -11,6 +11,7 @@ public class Image {
 	private int pv;
 	private String desc;
 	public String status;
+	public String author;
 	
 	public int getId(){
 		return id;
@@ -60,4 +61,11 @@ public class Image {
 	public void setStatus(String status){
 		this.status = status;
 	}
+	public String getAuthor(){
+		return author;
+	}
+	public void setAuthor(String author){
+		this.author = author;
+	}
+
 }

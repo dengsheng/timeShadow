@@ -1,9 +1,11 @@
 package com.snow.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.snow.model.Addf;
 import com.snow.model.Album;
+import com.snow.model.Comment;
 import com.snow.model.Image;
 import com.snow.model.Page;
 import com.snow.model.User;
@@ -24,6 +26,8 @@ public interface UserDao {
 	public int countImage(int id);
 
 	public List<Image> findImg(Page page,int id);
+	
+	public List<Image> findUserImg(int id);
 
 	public int getAid(String albumname);
 	
@@ -37,7 +41,17 @@ public interface UserDao {
 	
 	public Image findImgOne(int id);
 	
-	public void shareImg(int id,String desc);
+	//public void shareImg(int id,String desc);
 
 	public List<Image> findShareImg();
+
+	public void updateAlbum(String oldname, String albumname, String desc,
+			Date date);
+	
+	public void deleteAlbum(String name);
+	
+	public List<Comment> getComment(int tid);
+	
+	public void addComment(Comment comment);
+	
 }

@@ -16,6 +16,8 @@ import com.snow.model.Addf;
 import com.snow.model.AddfMapper;
 import com.snow.model.Album;
 import com.snow.model.AlbumMapper;
+import com.snow.model.Comment;
+import com.snow.model.CommentMapper;
 import com.snow.model.FriendMapper;
 import com.snow.model.Image;
 import com.snow.model.ImageMapper;
@@ -105,6 +107,8 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub
 		String sql = "INSERT INTO imgs(tname,turl,aid,tuploaddate) VALUES(?,?,?,?)";
 		int row = template.update(sql,new Object[]{image.getName(),image.getUrl(),image.getAid(),image.getCreatedate()});
+		String addsql = "UPDATE album SET apv = apv + 1 WHERE aid = ?";
+		int roww = template.update(addsql,new Object[]{image.getAid()});
 		if(row>0){
 			return true;
 		}else{
@@ -121,13 +125,25 @@ public class UserDaoImpl implements UserDao{
 		return row;
 	}
 
-	/*获取照片*/
+	/*获取相册照片*/
 	@Override
 	public List<Image> findImg(Page page,int id){
 		// TODO Auto-generated method stub
 		String sql = "select * from imgs  where aid = ? limit ?,?";
 		RowMapper<Image> imgmap = new ImageMapper();
 		List<Image> imglist = template.query(sql,new Object[]{id,page.getBegin(),page.getPageSize()},imgmap);
+		return imglist;
+	}
+	
+	
+	
+	/*获取个人照片并按浏览量排序*/
+	@Override
+	public List<Image> findUserImg(int id) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * from imgs WHERE aid in(SELECT aid from album WHERE uid=?) ORDER BY tpv DESC";
+		RowMapper<Image> imgmap = new ImageMapper();
+		List<Image> imglist = template.query(sql,new Object[]{id},imgmap);
 		return imglist;
 	}
 	
@@ -187,14 +203,14 @@ public class UserDaoImpl implements UserDao{
 		return img.get(0);
 	}
 	
-	/*分享照片*/
+	/*分享照片
 	@Override
 	public void shareImg(int id, String desc) {
 		Date today = new Date();
 		// TODO Auto-generated method stub
 		String sql = "UPDATE imgs set tdesc=?,status=? ,tuploaddate=? WHERE tid =?";
 		int row = template.update(sql, new Object[]{desc,"share",today,id});
-	}
+	}*/
 	
 	/*获取分享照片*/
 	@Override
@@ -205,6 +221,42 @@ public class UserDaoImpl implements UserDao{
 		List<Image> imglist = template.query(sql,new Object[]{"share"},imgmap);
 		return imglist;
 	}
+
+	/*修改相册*/
+	@Override
+	public void updateAlbum(String oldname, String albumname, String desc,
+			Date date) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE album SET aname=?,adescription=?,adate=? WHERE aname=?";
+		int row = template.update(sql,new Object[]{albumname,desc,date,oldname});
+		
+	}
+
+	@Override
+	public void deleteAlbum(String name) {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM album WHERE aname =?";
+		int row = template.update(sql,new Object[]{name});
+	}
+
+	/*获取照片评论*/
+	@Override
+	public List<Comment> getComment(int tid) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * from comment WHERE tid=?";
+		RowMapper<Comment> commentmap = new CommentMapper();
+		List<Comment> commentlist = template.query(sql,new Object[]{tid},commentmap);
+		return commentlist;
+	}
+
+	@Override
+	public void addComment(Comment comment) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO comment(para,tid,name,time) VALUES(?,?,?,?)";
+		template.update(sql,new Object[]{comment.getPara(),comment.getTid(),comment.getName(),comment.getTime()});
+	}
+
+	
 	
 	
 	

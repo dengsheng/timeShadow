@@ -1,5 +1,6 @@
 package com.snow.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import com.snow.dao.UserDao;
 
 import com.snow.model.Addf;
 import com.snow.model.Album;
+import com.snow.model.Comment;
 import com.snow.model.Image;
 import com.snow.model.Page;
 import com.snow.model.User;
@@ -103,17 +105,49 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userDao.findImgOne(id);
 	}
-
+	
+	/*
 	@Override
 	public void shareImg(int id, String desc) {
 		// TODO Auto-generated method stub
 		userDao.shareImg(id, desc);
-	}
+	}*/
 
 	@Override
 	public List<Image> findShareImg() {
 		// TODO Auto-generated method stub
 		return userDao.findShareImg();
+	}
+
+	@Override
+	public void updateAlbum(String oldname, String albumname, String desc,
+			Date date) {
+		// TODO Auto-generated method stub
+		userDao.updateAlbum(oldname, albumname, desc, date);
+	}
+
+	@Override
+	public void deleteAlbum(String name) {
+		// TODO Auto-generated method stub
+		userDao.deleteAlbum(name);
+	}
+
+	@Override
+	public List<Image> findUserImg(int id) {
+		// TODO Auto-generated method stub
+		return userDao.findUserImg(id);
+	}
+
+	@Override
+	public List<Comment> getComment(int tid) {
+		// TODO Auto-generated method stub
+		return userDao.getComment(tid);
+	}
+
+	@Override
+	public void addComment(Comment comment) {
+		// TODO Auto-generated method stub
+		userDao.addComment(comment);
 	}
 	
 	
