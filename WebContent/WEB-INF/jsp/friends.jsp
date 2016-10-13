@@ -71,7 +71,7 @@
 				<div class="col-md-12">
 					<a href="#" class="time-menu-btn js-time-menu-btn">Menu <i class="icon-menu"></i></a>
 					<a class="navbar-brand username" href="in
-					dex.html"><%=username %></a>		
+					dex"><%=username %></a>		
 				</div>
 			</div>
 		</div>

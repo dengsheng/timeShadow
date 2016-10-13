@@ -57,7 +57,7 @@ String username = (String)session.getAttribute("username");
 			<li class="active"><a href="#">主页</a></li>
 			<li><a href="albums">相册</a></li>
 			<li><a href="friends">好友</a></li>
-			<li><a href="#">排行</a></li>
+			<li><a href="#" class="time-range">排行</a></li>
 			<li><a href="message">信息管理</a></li>
 		</ul>
 		<h3 class="time-lead">Connect with us</h3>
@@ -68,15 +68,19 @@ String username = (String)session.getAttribute("username");
 		</p>
 	</div>
 	
-	<!-- 
-	<div>
+	<!-- range start-->
+	<div id="time-range">
+		<h2>排行</h2>
+		<ul class="list-group">
 		<c:forEach items="${uimgs}" var="uimg">
-			<div>
-			<img src="${basePath}${uimg.url}" alt="时光流影" width="50" height="50"></a>
-			<span style="position: absolute;left:0;absolute:0;color:#EE2222;"><b>${uimg.pv}</b></span>
-			</div>
+			<li class="list-group-item">
+		    <span class="badge">${uimg.pv}</span>
+		    <img src="${basePath}${uimg.url}" alt="时光流影" width="50" height="50">
+		  </li>
 		</c:forEach>
-	</div>-->
+		</ul>
+	</div>
+	<!-- range end-->
 	<header id="time-header" role="banner">
 		<div class="container">
 			<div class="row">
@@ -86,10 +90,6 @@ String username = (String)session.getAttribute("username");
 				</div>
 			</div>
 		</div>
-		<!-- 
-		<div>
-			<a href="#" style="position:absolute;right:138px;color:#444;" id="range">排行榜</a>
-		</div>-->
 	</header>
 	<!-- END .header -->
 	
@@ -107,12 +107,7 @@ String username = (String)session.getAttribute("username");
 	        				<a href="img?id=${image.id}" class="image-popup time-board-img" title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, eos?"><img src="${basePath}${image.url}" alt="时光流影"></a>
         				</div>
         				<div class="time-desc">${image.desc}</div>
-        				<div class="time-state">${image.createdate} <b>${image.author}</b> &nbsp; &nbsp;<i class="glyphicon glyphicon-eye-open time-see">${image.pv}</i><button class="btn btn-default open-comment" style="margin-left:10px;width:10px;height:10px;line-height:10px;"></button></div>
-        				<div class="discuss" style="display:none;">
-        				
-        						<input class="form-control" type="text" />
-        						<button class="btn btn-default submit-comment" type="submit">提交</button>
-        				</div>
+        				<div class="time-state">${image.createdate} <b>${image.author}</b> &nbsp; &nbsp;<i class="glyphicon glyphicon-eye-open time-see">${image.pv}</i></div>
         			</div>
 		   		</c:forEach>
         </div>
@@ -156,13 +151,7 @@ String username = (String)session.getAttribute("username");
 	<script>
 		$(function(){
 		
-			$(".open-comment").click(function(){
-				var comment = $(this).parent().parent().find("div.discuss");
-				comment.toggleClass("show");
-			});
-			$(".submit-comment").click(function(){
-				
-			});
+			
 		});
 	</script>
 	

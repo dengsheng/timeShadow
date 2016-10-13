@@ -109,7 +109,7 @@ form{
 
 
 /*菜单栏*/
-#time-offcanvass,#imgs-offCanvas {
+#time-offcanvass,#imgs-offCanvas,#time-range {
   position: fixed;
   z-index: 88;
   top: 0;
@@ -162,7 +162,7 @@ form{
 #time-offcanvass ul li.active a {
   color: #EF5353 !important;
 }
-#time-offcanvass.time-awake,#imgs-offcanvass.time-awake {
+#time-offcanvass.time-awake,#imgs-offcanvass.time-awake,#time-range.time-awake {
   -webkit-transform: translateX(0px);
   -moz-transform: translateX(0px);
   -ms-transform: translateX(0px);

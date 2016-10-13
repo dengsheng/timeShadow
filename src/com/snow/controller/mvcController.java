@@ -6,7 +6,9 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 	import java.util.Date;
+import java.util.HashMap;
 	import java.util.List;
+import java.util.Map;
 	import java.util.Random;
 
 	import javax.annotation.Resource;
@@ -14,13 +16,16 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
 	import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
 	import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 	import org.springframework.stereotype.Controller;
 	import org.springframework.ui.Model;
 	import org.springframework.web.bind.annotation.RequestMapping;
 	import org.springframework.web.bind.annotation.RequestMethod;
 	import org.springframework.web.bind.annotation.RequestParam;
 	import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 	//import org.springframework.web.multipart.MultipartHttpServletRequest;
 	import org.springframework.web.multipart.MultipartFile;
 	import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +37,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.snow.model.Comment;
 	import com.snow.model.User;
 	import com.snow.model.Image;
+import com.snow.model.UserMapper;
 import com.snow.service.UserService;
 
 	@Controller
@@ -160,8 +166,11 @@ import com.snow.service.UserService;
 	    
 	    /*个人信息页面*/
 	    @RequestMapping("message")
-	    public String messgae(HttpSession session){
+	    public String messgae(HttpSession session,Model model){
 	    	if(session.getAttribute("username") != null){
+	    		RowMapper<User> userMapper = new UserMapper();
+	    		List<User> user =  template.query("SELECT * from user WHERE uname=?", new Object[]{session.getAttribute("username")}, userMapper);
+	    		model.addAttribute("user", user.get(0));
 	    		return "message";
 	    	}else{
 	    		return "login";
@@ -170,13 +179,17 @@ import com.snow.service.UserService;
 	    }
 	    
 	    /*修改个人信息*/
-	    @RequestMapping("amessage")
-	    public String amessage(HttpSession session,String username,String descriptions){
+	    @RequestMapping(value="amessage",method=RequestMethod.POST)
+	    public @ResponseBody String amessage(HttpSession session,String username,String descriptions,Model model){
 	    	String ousername = (String)session.getAttribute("username");
 	    	if(userService.amessage(ousername, username, descriptions)){
-	    		return "redirect:/amessage";
+	    		Map<String,Object> map = new HashMap<String,Object>();
+	    		map.put("name", username);
+	    		map.put("desc", descriptions);
+	    		model.addAttribute("user", map);
+	    		return map.toString();
 	    	}else{
-	    		return "redirect:/amessage";
+	    		return null;
 	    	}
 	    	
 	    }
@@ -276,6 +289,8 @@ import com.snow.service.UserService;
 					System.out.println(request.getParameter("albumname"));
 					System.out.println(userService.getAid(albumname));
 					image.setAid(userService.getAid(albumname));
+					String name = template.queryForObject("SELECT uname from user WHERE uid in(SELECT uid from album WHERE aid =?)", new Object[]{userService.getAid(albumname)},String.class);
+					image.setAuthor(name);
 					//image.setAid(template.queryForObject("SELECT aid FROM album where aname=?", new Object[]{request.getParameter("albumname")}, Integer.class));
 					//image.setAid(template.query("SELECT aid FROM album where aname=?",new Object[]{request.getParameter("albumname")}));
 					//调用dao层方法，执行图片上传操作

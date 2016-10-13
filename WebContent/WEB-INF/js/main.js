@@ -16,11 +16,14 @@
 
 	// OffCanvass
 	var offCanvass = function() {
-		$('body').on('click', '.js-time-menu-btn, .js-time-offcanvass-close', function(){
+		$('body').on('click', '.js-time-menu-btn, .js-time-offcanvass-close,.time-range', function(){
 			$('#time-offcanvass').toggleClass('time-awake');
 		});
+		$('body').on('click','.time-range',function(){
+			$('#time-range').toggleClass('time-awake');
+		});
 		$('body').on('click', '#range', function(){
-			$('#imgs-offcanvass').toggleClass('time-awake');
+			$('#imgs-offcanvass,#time-range').toggleClass('time-awake');
 		});
 	};
 
@@ -31,6 +34,9 @@
 	    if (!container.is(e.target) && container.has(e.target).length === 0) {
 	    	if ( $('#time-offcanvass').hasClass('time-awake') ) {
 	    		$('#time-offcanvass').removeClass('time-awake');
+	    	}
+	    	if ( $('#time-range').hasClass('time-awake') ) {
+	    		$('#time-range').removeClass('time-awake');
 	    	}
 	    }
 		});

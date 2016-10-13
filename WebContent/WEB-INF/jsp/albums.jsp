@@ -4,6 +4,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String username = (String)session.getAttribute("username");
 %>
 
 <!DOCTYPE html>
@@ -136,7 +137,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--menu-->
 <div id="time-offcanvass">
 	<a href="#" class="time-offcanvass-close js-time-offcanvass-close">Menu <i class="icon-cross"></i> </a>
-	<h1 class="time-logo"><a class="navbar-brand" href="index.html">Snow</a></h1>
+	<h1 class="time-logo"><a class="navbar-brand" href="index">Snow</a></h1>
 	<ul>
 		<li><a href="index">主页</a></li>
 		<li class="active"><a href="#">相册</a></li>
@@ -159,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="row">
 			<div class="col-md-12">
 				<a  class="time-menu-btn js-time-menu-btn">Menu <i class="icon-menu"></i></a>
-				<a class="navbar-brand" href="index.html">Snow</a>		
+				<a class="navbar-brand" href="index"><%=username %></a>		
 			</div>
 		</div>
 	</div>

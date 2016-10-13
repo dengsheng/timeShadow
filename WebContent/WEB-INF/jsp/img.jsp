@@ -7,6 +7,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+
 	request.getServerName()+":"+request.getServerPort()+path+"/";
 request.setAttribute("basePath",basePath);
+String username = (String)session.getAttribute("username");
 %>
 
 <!DOCTYPE html>
@@ -108,7 +109,7 @@ request.setAttribute("basePath",basePath);
 			<div class="row">
 				<div class="col-md-12">
 					<a class="time-menu-btn js-time-menu-btn">Menu <i class="icon-menu"></i></a>
-					<a class="navbar-brand" href="index">SNOW</a>		
+					<a class="navbar-brand" href="index"><%=username %></a>		
 				</div>
 			</div>
 		</div>

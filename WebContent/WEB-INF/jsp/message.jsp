@@ -85,8 +85,8 @@
 					  <div class="panel-heading">
 					    <h3 class="panel-title">姓名</h3>
 					  </div>
-					  <div class="panel-body">
-						<%=username %>	
+					  <div class="panel-body name">
+						${user.username}
 					  </div>
 					</div>			
 				</div>
@@ -96,7 +96,7 @@
 					    <h3 class="panel-title">个性签名</h3>
 					  </div>
 					  <div class="panel-body">
-						<%=descriptions %>	
+						${user.descriptions}
 					  </div>
 					</div>					
 				</div>
@@ -149,9 +149,11 @@
 					document.querySelectorAll(".panel-body")[1].innerHTML = "<input type='text' id='descriptions' placeholder="+descriptions+" name='descriptions' />"
 					this.onclick = null;
 			};
+			
 			$("#submit").click(function(){
-				$.post("amessage",{username:$("#username").val(),descriptions:$("#descriptions").val()},function(){
-					console.log("success");
+				$.post("amessage",{"username":$("#username").val(),"descriptions":$("#descriptions").val()},function(data){
+				    document.querySelectorAll(".panel-body")[0].innerHTML =  $(".name").find("input").val();
+					document.querySelectorAll(".panel-body")[1].innerHTML = data.slice(data.indexOf("=")+1,data.indexOf(","));//
 				});
 			});
 		}

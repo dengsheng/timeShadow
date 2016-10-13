@@ -212,13 +212,13 @@ public class UserDaoImpl implements UserDao{
 		int row = template.update(sql, new Object[]{desc,"share",today,id});
 	}*/
 	
-	/*获取分享照片*/
+	/*获取所有照片*/
 	@Override
 	public List<Image> findShareImg() {
 		// TODO Auto-generated method stub
-		String sql = "select * from imgs where status =?";
+		String sql = "select * from imgs";
 		RowMapper<Image> imgmap = new ImageMapper();
-		List<Image> imglist = template.query(sql,new Object[]{"share"},imgmap);
+		List<Image> imglist = template.query(sql,imgmap);
 		return imglist;
 	}
 

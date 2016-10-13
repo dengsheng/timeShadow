@@ -77,7 +77,7 @@
 					<p>
 					<img src="images/img_29.jpg" alt="时光流影小分队" class="img-rounded img-responsive"></p>
 
-					<p>来自南昌航空大学</p>
+					<p>南昌航空大学</p>
 				
 					<p>我说鸡蛋你说要</p>
 					
