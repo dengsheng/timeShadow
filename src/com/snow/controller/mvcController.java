@@ -341,6 +341,7 @@ import com.snow.service.UserService;
 	    @RequestMapping("friends")
 	    public String friends(HttpSession session,Model model){
 	    	String name = (String) session.getAttribute("username");
+	    	model.addAttribute("name",name);
 			if(userService.getAddf(name).size()>0){
 				model.addAttribute("addfs",userService.getAddf(name));
 			}

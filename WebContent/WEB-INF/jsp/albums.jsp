@@ -241,7 +241,7 @@ String username = (String)session.getAttribute("username");
 		
 		
 	});
-	/*
+	
 	$(function(){
 		$(".delete-album").click(function(){
 			$.ajax({
@@ -258,7 +258,7 @@ String username = (String)session.getAttribute("username");
 			});
 			}
 		);
-	});*/
+	});
 </script>
 </body>
 </html>

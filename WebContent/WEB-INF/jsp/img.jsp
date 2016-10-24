@@ -214,13 +214,14 @@ String username = (String)session.getAttribute("username");
 		    		url:"comment",
 		    		type:"POST",
 		    		data:{para:$(".yourcomment").val(),iid:$(".iid").text()},
-		    		dataType:"json",
 		    		cache:false,
 		    		success:function(){
-		    			console.log("successed");
+		    		    var id = $(".iid").text();
+		    			window.location="img?id="+id;
 		    		},
 		    		error:function(){
-		    			console.error("comment failed");
+		    		    var id = $(".iid").text();
+		    			window.location="img?id="+id;
 		    		}
 		    	});
 		    });
